@@ -45,20 +45,34 @@ namespace Snake
         {
             if (_key == ConsoleKey.LeftArrow)
             {
-                snake.direction = Direction.LEFT;
+                direction = Direction.LEFT;
             }
             else if (_key == ConsoleKey.RightArrow)
             {
-                snake.direction = Direction.RIGHT;
+                direction = Direction.RIGHT;
             }
             else if (_key == ConsoleKey.UpArrow)
             {
-                snake.direction = Direction.UP;
+                direction = Direction.UP;
             }
             else if (_key == ConsoleKey.DownArrow)
             {
-                snake.direction = Direction.DOWN;
+                direction = Direction.DOWN;
             }
         }
+
+        internal bool Eat(Point food)
+        {
+            Point head = GetNextPoint();
+            if (head.IsHit(food))
+            {
+                food.sym = head.sym;
+                food.Draw();
+                pList.Add(food);
+                return true;
+            }
+            else
+                return false;
+        } 
     }
 }
